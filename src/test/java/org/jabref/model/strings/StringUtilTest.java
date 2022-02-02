@@ -1,21 +1,17 @@
 package org.jabref.model.strings;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StringUtilTest {
 
@@ -149,7 +145,33 @@ class StringUtilTest {
     @Test
     void testGetPart() {
         // Should be added
+//        String actual = StringUtil.getPart("{hello there}", 0, true);
+//        String expected = "hello there";
+//        String actual = StringUtil.getPart("i}", -1, true);
+//        String expected = "i";
+        String actual = StringUtil.getPart("hello1 hello2", -1, true);
+        String expected = "hello1 hello2";
+        assertEquals(expected, actual);
+         actual = StringUtil.getPart("hello1 hello2", -1, false);
+         expected = "hello1";
+        assertEquals(expected, actual);
+        actual = StringUtil.getPart("{{hello1}}", -1, true);
+        expected = "{{hello1}}";
+        assertEquals(expected, actual);
+        actual = StringUtil.getPart("{hello1}", -1, true);
+        expected = "{hello1}";
+        assertEquals(expected, actual);
+
+        // index
+        // {hello}, 0, true
+        // {hello}, -1, true
+        // hello}, -1, true
+
+        // ""
+        //}{
+        //}hello{
     }
+
 
     @Test
     void testFindEncodingsForString() {
