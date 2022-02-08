@@ -1,10 +1,16 @@
 package org.jabref.model.strings;
 
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.nio.charset.StandardCharsets;
@@ -143,6 +149,8 @@ class StringUtilTest {
         assertEquals("f[]f", StringUtil.stripBrackets("f[]f"));
         assertEquals(null, StringUtil.stripBrackets(null));
     }
+
+
 
 //    @ParameterizedTest
 //    @CsvSource({"2016,true", "2000,true", "1500,false"})
