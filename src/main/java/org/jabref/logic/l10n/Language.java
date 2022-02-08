@@ -52,7 +52,6 @@ public enum Language {
             locale = new Locale(languageParts[0]);
         } else if (languageParts.length == 2) {
             locale = new Locale(languageParts[0], languageParts[1]);
-            System.out.println(locale.getCountry() + " " + locale.getLanguage());
         } else {
             locale = Locale.ENGLISH;
         }
