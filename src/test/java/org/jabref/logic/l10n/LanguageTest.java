@@ -25,4 +25,29 @@ class LanguageTest {
     void convertToKnownLocaleNull() {
         assertThrows(NullPointerException.class, () -> Language.convertToSupportedLocale(null));
     }
+
+    @Test
+    void convertChineseCN() {
+        assertEquals(Optional.of(new Locale("zh", "CN")), Language.convertToSupportedLocale(Language.SIMPLIFIED_CHINESE));
+    }
+
+    @Test
+    void convertChineseTW() {
+        assertEquals(Optional.of(new Locale("zh", "TW")), Language.convertToSupportedLocale(Language.TRADITIONAL_CHINESE));
+    }
+
+    @Test
+    void convertJapanese() {
+        assertEquals(Optional.of(new Locale("ja")), Language.convertToSupportedLocale(Language.JAPANESE));
+    }
+
+    @Test
+    void convertIndonesia() {
+        assertEquals(Optional.of(new Locale("in")), Language.convertToSupportedLocale(Language.BAHASA_INDONESIA));
+    }
+
+    @Test
+    void convertKoreanWithDiffID() {
+        assertEquals(Optional.of(new Locale("en")), Language.convertToSupportedLocale(Language.KOREAN));
+    }
 }

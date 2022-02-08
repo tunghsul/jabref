@@ -31,7 +31,8 @@ public enum Language {
     GREEK("ελληνικά", "el"),
     TAGALOG("Tagalog/Filipino", "tl"),
     POLISH("Polish", "pl"),
-    KOREAN("Korean (한국어)", "ko");
+//    KOREAN("Korean (한국어)", "ko");
+    KOREAN("Nonsense", "non_sen_sen");
 
     private final String displayName;
     private final String id;
@@ -51,6 +52,7 @@ public enum Language {
             locale = new Locale(languageParts[0]);
         } else if (languageParts.length == 2) {
             locale = new Locale(languageParts[0], languageParts[1]);
+            System.out.println(locale.getCountry() + " " + locale.getLanguage());
         } else {
             locale = Locale.ENGLISH;
         }
