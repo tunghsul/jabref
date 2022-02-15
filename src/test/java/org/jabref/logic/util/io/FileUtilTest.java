@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -51,8 +52,78 @@ class FileUtilTest {
         layoutFormatterPreferences = mock(LayoutFormatterPreferences.class, Answers.RETURNS_DEEP_STUBS);
     }
 
+    // PART3 New Test Cases
     @Test
-    void extensionBakAddedCorrectly() {
+    void getUniquePathFragmentNonExistFileTest() {
+        String[] pathArr = {Path.of("C:/uniquefile.bib").toString(),
+                Path.of("C:/downloads/filename.bib").toString(),
+                Path.of("C:/mypaper/bib/filename.bib").toString(),
+                Path.of("C:/external/mypaper/bib/filename.bib").toString(), ""};
+        List<String> paths = Arrays.asList(pathArr);
+
+        Optional<String> result = FileUtil.getUniquePathFragment(paths, nonExistingTestPath);
+        assertEquals(Optional.empty(), result);
+    }
+
+    @Test
+    void relativizeFileNotAbsoluteTest() {
+        Path[] pathArr = {Path.of("C:/uniquefile.bib"),
+                Path.of("C:/downloads/filename.bib"),
+                Path.of("C:/mypaper/bib/filename.bib"),
+                Path.of("C:/external/mypaper/bib/filename.bib")};
+        List<Path> paths = Arrays.asList(pathArr);
+        Path pt = Path.of("C:/mypaper/bib/filename.bib");
+        Path result = FileUtil.relativize(pt, paths);
+        assertEquals(pt, result);
+    }
+
+    @Test
+    void relativizeFileAbsoluteTest() {
+        Path[] pathArr = {Path.of("C:/uniquefile.bib"),
+                Path.of("C:/downloads/filename.bib"),
+                Path.of("/mypaper/bib/"),
+                Path.of("C:/external/mypaper/bib/filename.bib")};
+        List<Path> paths = Arrays.asList(pathArr);
+        Path pt = Path.of("/mypaper/bib/filename.bib");
+        Path result = FileUtil.relativize(pt, paths);
+        assertEquals(Path.of("filename.bib"), result);
+    }
+
+    @Test
+    void relativizeFileNotInDirectoryTest() {
+        Path[] pathArr = {Path.of("C:/uniquefile.bib"),
+                Path.of("C:/downloads/filename.bib"),
+                Path.of("/mypaper/bib/"),
+                Path.of("C:/external/mypaper/bib/filename.bib")};
+        List<Path> paths = Arrays.asList(pathArr);
+        Path result = FileUtil.relativize(existingTestFile, paths);
+        assertEquals(existingTestFile, result);
+    }
+
+    @Test
+    void findNonExistingFromPathListTest() {
+        Path[] pathArr = {Path.of("C:/uniquefile.bib"),
+                Path.of("C:/downloads/filename.bib"),
+                Path.of("C:/mypaper/bib/filename.bib"),
+                Path.of("C:/external/mypaper/bib/filename.bib")};
+        List<Path> paths = Arrays.asList(pathArr);
+        List<Path> result = FileUtil.find(nonExistingTestPath.toString(), paths);
+        List<Path> expected = new ArrayList<>();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void findExistingFromPathListTest() {
+        Path[] pathArr = {Path.of("/Users/elenalin/Downloads/")};
+        List<Path> paths = Arrays.asList(pathArr);
+        List<Path> result = FileUtil.find("stop_words.txt", paths);
+        List<Path> expected = new ArrayList<>();
+        expected.add(Path.of("/Users/elenalin/Downloads/stop_words.txt"));
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void extensionBrenameFileWithExceptionakAddedCorrectly() {
         assertEquals(Path.of("demo.bib.bak"),
                 FileUtil.addExtension(Path.of("demo.bib"), ".bak"));
     }
