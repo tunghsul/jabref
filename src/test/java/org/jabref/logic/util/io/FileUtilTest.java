@@ -1,5 +1,14 @@
 package org.jabref.logic.util.io;
 
+import org.jabref.logic.layout.LayoutFormatterPreferences;
+import org.jabref.model.entry.BibEntry;
+import org.jabref.model.entry.field.StandardField;
+import org.jabref.model.util.FileHelper;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.mockito.Answers;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,21 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.jabref.logic.layout.LayoutFormatterPreferences;
-import org.jabref.model.entry.BibEntry;
-import org.jabref.model.entry.field.StandardField;
-import org.jabref.model.util.FileHelper;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import org.mockito.Answers;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 class FileUtilTest {
@@ -52,7 +47,7 @@ class FileUtilTest {
         layoutFormatterPreferences = mock(LayoutFormatterPreferences.class, Answers.RETURNS_DEEP_STUBS);
     }
 
-    // PART3 New Test Cases
+    // PART3: Our New Test Cases
     @Test
     void getUniquePathFragmentNonExistFileTest() {
         String[] pathArr = {Path.of("C:/uniquefile.bib").toString(),
@@ -121,6 +116,8 @@ class FileUtilTest {
         expected.add(Path.of("/Users/elenalin/Downloads/stop_words.txt"));
         assertEquals(expected, result);
     }
+
+    //Part3: End of Our New Test Cases
 
     @Test
     void extensionBrenameFileWithExceptionakAddedCorrectly() {

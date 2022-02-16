@@ -65,14 +65,6 @@ public class KeywordListTest {
         assertEquals(ky_new, ky);
     }
 
-//    @Test
-//    public void iteratorTest() throws Exception{
-//        KeywordList ky = new KeywordList("key1");
-//        Array<Keyword> result = new Iterator<>();
-//        result.add(new Keyword("key1"));
-//        assertEquals(result,ky.iterator());
-//    }
-
     @Test
     public void sizeTest() throws Exception {
         KeywordList ky = new KeywordList("key1", "key2", "key3");
@@ -124,7 +116,7 @@ public class KeywordListTest {
         assertEquals(new Keyword("key2"), ky.get(1));
     }
 
-
+    //Part 3: End of Our New Test Cases
 
 
     @Test
