@@ -1,5 +1,11 @@
 package org.jabref.model.strings;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -7,13 +13,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringUtilTest {
 
@@ -161,7 +165,7 @@ class StringUtilTest {
     @ParameterizedTest
     @CsvSource({"{hello},-1,true,{hello}", "'',-1,true,''", "hello,-1,true,hello", "hello there,-1,true,hello there",
             "{hello there},-1,true,{hello there}", "}{,-1,true,''", "'      {hello}',-1,true,{hello}", "{},-1,true,{}",
-            "{     hello},-1,true,{     hello}","{hello,-1,true,{hello", "}hello},-1,true,''", "hello},-1,true,hello"})
+            "{     hello},-1,true,{     hello}", "{hello,-1,true,{hello", "}hello},-1,true,''", "hello},-1,true,hello"})
     void testGetPart_TrueBool(String text, int startIndex, boolean terminateOnEndBraceOnly, String expected) {
         Assertions.assertEquals(expected, StringUtil.getPart(text, startIndex, terminateOnEndBraceOnly));
     }
