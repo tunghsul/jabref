@@ -107,7 +107,7 @@ public class KeywordListTest {
     public void clearTest() throws Exception {
         KeywordList ky = new KeywordList("key1", "key2", "key3");
         ky.clear();
-        assertEquals(new KeywordList(),ky);
+        assertEquals(new KeywordList(), ky);
     }
 
     @Test

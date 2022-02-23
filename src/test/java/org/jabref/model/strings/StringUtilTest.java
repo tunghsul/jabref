@@ -1,16 +1,10 @@
 package org.jabref.model.strings;
 
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.nio.charset.StandardCharsets;
@@ -168,15 +162,15 @@ class StringUtilTest {
     @CsvSource({"{hello},-1,true,{hello}", "'',-1,true,''", "hello,-1,true,hello", "hello there,-1,true,hello there",
             "{hello there},-1,true,{hello there}", "}{,-1,true,''", "'      {hello}',-1,true,{hello}", "{},-1,true,{}",
             "{     hello},-1,true,{     hello}","{hello,-1,true,{hello", "}hello},-1,true,''", "hello},-1,true,hello"})
-    void testGetPart_TrueBool(String text,int startIndex,boolean terminateOnEndBraceOnly,String expected){
+    void testGetPart_TrueBool(String text, int startIndex, boolean terminateOnEndBraceOnly, String expected) {
         Assertions.assertEquals(expected, StringUtil.getPart(text, startIndex, terminateOnEndBraceOnly));
     }
 
     @ParameterizedTest
     @CsvSource({"{hello},-1,false,{hello}", "'',-1,false,''", "hello,-1,false,hello", "hello there,-1,false,hello",
             "{hello there},-1,false,{hello there}", "}{,-1,false,''", "'      {hello}',-1,false,{hello}", "{},-1,false,{}",
-            "{     hello},-1,false,{     hello}","{hello,-1,false,{hello", "}hello},-1,false,''", "hello},-1,false,hello"})
-    void testGetPart_FalseBool(String text,int startIndex,boolean terminateOnEndBraceOnly,String expected){
+            "{     hello},-1,false,{     hello}", "{hello,-1,false,{hello", "}hello},-1,false,''", "hello},-1,false,hello"})
+    void testGetPart_FalseBool(String text, int startIndex, boolean terminateOnEndBraceOnly, String expected) {
         Assertions.assertEquals(expected, StringUtil.getPart(text, startIndex, terminateOnEndBraceOnly));
     }
 
@@ -184,10 +178,9 @@ class StringUtilTest {
     @CsvSource({"{hello},0,true,hello", "'',0,true,''", "hello,0,true,ello", "hello,1,true,llo", "hello,4,true,''",
             "hello there,0,true,ello there", "hello there,5,true,there", "{hello there},0,true,hello there", "hello,7,true,''",
             "hello,-2,true,''"})
-    void testGetPart_ChangeIndex(String text,int startIndex,boolean terminateOnEndBraceOnly,String expected){
+    void testGetPart_ChangeIndex(String text, int startIndex, boolean terminateOnEndBraceOnly, String expected) {
         Assertions.assertEquals(expected, StringUtil.getPart(text, startIndex, terminateOnEndBraceOnly));
     }
-
 
     @Test
     void testFindEncodingsForString() {
