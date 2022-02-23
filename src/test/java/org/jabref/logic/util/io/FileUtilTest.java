@@ -4,6 +4,7 @@ import org.jabref.logic.layout.LayoutFormatterPreferences;
 import org.jabref.model.entry.BibEntry;
 import org.jabref.model.entry.field.StandardField;
 import org.jabref.model.util.FileHelper;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -117,7 +118,7 @@ class FileUtilTest {
         assertEquals(expected, result);
     }
 
-    //Part3: End of Our New Test Cases
+    // Part3: End of Our New Test Cases
 
     @Test
     void extensionBrenameFileWithExceptionakAddedCorrectly() {

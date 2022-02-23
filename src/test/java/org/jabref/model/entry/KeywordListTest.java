@@ -1,10 +1,10 @@
 package org.jabref.model.entry;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,19 +19,19 @@ public class KeywordListTest {
         keywords.add("keywordTwo");
     }
 
-    //Part 3: Our New Test Cases
+    // Part 3: Our New Test Cases
 
     @Test
-    public void parseListReturnListTest()throws Exception{
+    public void parseListReturnListTest()throws Exception {
         List<String> keywordChains = new ArrayList<>();
         keywordChains.add("key1");
         keywordChains.add("key2");
         assertEquals(new KeywordList(keywordChains),
-                KeywordList.parse("key1, key2", ',') );
+                KeywordList.parse("key1, key2", ','));
     }
 
     @Test
-    public void createCloneCronstructorTest() throws Exception{
+    public void createCloneCronstructorTest() throws Exception {
         KeywordList ky = new KeywordList("key1");
         assertEquals(ky, ky.createClone());
     }
@@ -43,7 +43,7 @@ public class KeywordListTest {
         Keyword ky_new = new Keyword("key4");
         KeywordList ky2 = new KeywordList("key1", "key4", "key3");
         ky.replaceAll(ky_replace, ky_new);
-        assertEquals(ky2,ky);
+        assertEquals(ky2, ky);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class KeywordListTest {
         Keyword ky_new = new Keyword("key4");
         KeywordList ky2 = new KeywordList("key1", "key2", "key3", "key4");
         ky.replaceAll(ky_replace, ky_new);
-        assertEquals(ky2,ky);
+        assertEquals(ky2, ky);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class KeywordListTest {
     public void addAllTest() throws Exception {
         KeywordList ky = new KeywordList("key1", "key2", "key3");
         ky.addAll(new KeywordList("key4", "key5"));
-        assertEquals(new KeywordList("key1", "key2", "key3","key4", "key5"),
+        assertEquals(new KeywordList("key1", "key2", "key3", "key4", "key5"),
                 ky);
     }
 
@@ -116,14 +116,12 @@ public class KeywordListTest {
         assertEquals(new Keyword("key2"), ky.get(1));
     }
 
-    //Part 3: End of Our New Test Cases
-
+    // Part 3: End of Our New Test Cases
 
     @Test
     public void parseEmptyStringReturnsEmptyList() throws Exception {
         assertEquals(new KeywordList(), KeywordList.parse("", ','));
     }
-
 
     @Test
     public void parseOneWordReturnsOneKeyword() throws Exception {
