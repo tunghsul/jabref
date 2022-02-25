@@ -243,6 +243,33 @@ public class StringUtil {
     }
 
     /**
+     * Appends a text to a string builder. Wraps the text so that each line is approx wrapAmount characters long.
+     * Wrapping is done using newline and tab character.
+     *
+     * @param line          the line of text to be wrapped and appended
+     * @param wrapAmount    the number of characters belonging to a line of text
+     * @param newlineString a string containing the newline character(s)
+     */
+    public void nonStaticAddWrappedLine(StringBuilder result, String line, int wrapAmount, String newlineString) {
+        // Set our pointer to the beginning of the new line in the StringBuffer:
+        int length = result.length();
+        // Add the line, unmodified:
+        result.append(line);
+
+        // insert newlines and one tab character at each position, where wrapping is necessary
+        while (length < result.length()) {
+            int current = result.indexOf(" ", length + wrapAmount);
+            if ((current < 0) || (current >= result.length())) {
+                break;
+            }
+
+            result.deleteCharAt(current);
+            result.insert(current, newlineString + "\t");
+            length = current + newlineString.length();
+        }
+    }
+
+    /**
      * Quotes each and every character, e.g. '!' as &#33;. Used for verbatim
      * display of arbitrary strings that may contain HTML entities.
      */

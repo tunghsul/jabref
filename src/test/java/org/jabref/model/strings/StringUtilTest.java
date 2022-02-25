@@ -409,4 +409,12 @@ class StringUtilTest {
     void testGuoteStringIfSpaceIsContained(String expected, String source) {
         assertEquals(expected, StringUtil.quoteStringIfSpaceIsContained(source));
     }
+
+    @Test
+    void testNonStaticAddWrappedLine() {
+        StringUtil str = new StringUtil();
+        StringBuilder res = new StringBuilder();
+        str.nonStaticAddWrappedLine(res, "NahalK YiChen HsuanL", 5, "&&");
+        assertEquals("NahalK&&\tYiChen&&\tHsuanL", res.toString());
+    }
 }
