@@ -242,14 +242,8 @@ public class StringUtil {
         }
     }
 
-    /**
-     * Appends a text to a string builder. Wraps the text so that each line is approx wrapAmount characters long.
-     * Wrapping is done using newline and tab character.
-     *
-     * @param line          the line of text to be wrapped and appended
-     * @param wrapAmount    the number of characters belonging to a line of text
-     * @param newlineString a string containing the newline character(s)
-     */
+    // Part 5
+
     public void nonStaticAddWrappedLine(StringBuilder result, String line, int wrapAmount, String newlineString) {
         // Set our pointer to the beginning of the new line in the StringBuffer:
         int length = result.length();
