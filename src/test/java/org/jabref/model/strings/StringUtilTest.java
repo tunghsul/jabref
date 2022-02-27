@@ -12,12 +12,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.MockedStatic;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 class StringUtilTest {
 
@@ -418,5 +420,14 @@ class StringUtilTest {
         StringBuilder res = new StringBuilder();
         str.nonStaticAddWrappedLine(res, "NahalK YiChen HsuanL", 5, "&&");
         assertEquals("NahalK&&\tYiChen&&\tHsuanL", res.toString());
+    }
+
+    @Test
+    void testMock() {
+        MockedStatic<StringUtil> mock = mockStatic(StringUtil.class);
+        mock.when(() -> StringUtil.getPart("{aaa}", -1, false)).thenReturn("qqqq");
+        assertEquals("qqqq", StringUtil.getPart("{aaa}", -1, false));
+        StringUtil.getPart("{aaa}", -1, false);
+        mock.verify(() -> StringUtil.getPart("{aaa}", -1, false), times(2));
     }
 }
