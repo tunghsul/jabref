@@ -3,6 +3,7 @@ package org.jabref.cli;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -129,4 +130,15 @@ class JabRefCLITest {
 
         assertEquals(bibtex, cli.getBibtexImport());
     }
+
+    // PART 5 : Mockito test
+
+    @Test
+    void testJabRefCLIUsingMockito() {
+        JabRefCLI mock_cli = Mockito.mock(JabRefCLI.class);
+        Mockito.when(mock_cli.getFetcherEngine()).thenReturn("1.2.3");
+        assertEquals("1.2.3", mock_cli.getFetcherEngine());
+        Mockito.verify(mock_cli, Mockito.times(1)).getFetcherEngine();
+    }
+
 }
